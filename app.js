@@ -6,6 +6,9 @@ const config = require('./config/config.js');
 
 const app = express();
 
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+
 app.use('/', require('./routes/index'));
 
 app.listen(config.server.port, () => {
