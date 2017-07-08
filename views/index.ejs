@@ -6,7 +6,7 @@
   </head>
   <body>
     <% for (let file of files) { %>
-    <a href="<%= file.name %>" class="file_name"><%= file.name %></a>
+    <a href="<%= current %><%= file.name %>" class="file_name"><%= file.name %></a>
     <span><%= file.size %></span><br />
     <% } %>
   </body>
