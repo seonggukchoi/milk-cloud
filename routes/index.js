@@ -14,7 +14,7 @@ router.get('/', (req, res, next) => {
   for (let file of fileNames) {
     let fileStat = fs.statSync(path.join(dirPath, file));
     let fileSize = fileSizeCalc(fileStat.size);
-    
+
     fileList.push({
       name: file,
       size: fileSize,
@@ -23,21 +23,39 @@ router.get('/', (req, res, next) => {
   }
 
   res.render('index', {
+    current: '/',
     files: fileList
   });
 });
 
 router.get('/:dirPath', (req, res, next) => {
   let dirPath = path.join(config.service.root, req.params.dirPath);
-  if (fs.statSync(dirPath).isDirectory()) {
-    let fileList = fs.readdirSync(dirPath);
-    fileList.unshift('..');
+  let isDirectory = fs.statSync(dirPath).isDirectory();
+
+  if (isDirectory) {
+    let fileNames = fs.readdirSync(dirPath);
+    let fileList = new Array();
+    fileList.push({
+      name: '..',
+      size: null,
+      isFile: false
+    });
+    for (let file of fileNames) {
+      let fileStat = fs.statSync(path.join(dirPath, file));
+      let fileSize = fileSizeCalc(fileStat.size);
+      fileList.push({
+        name: file,
+        size: fileSize,
+        isFile: fileStat.isFile()
+      });
+    }
 
     res.render('index', {
+      current: req.params.dirPath,
       files: fileList
     });
-  } else {
-    res.send(dirPath);
+  } else if (!isDirectory){
+    res.send(req.params.dirPath);
   }
 });
 
