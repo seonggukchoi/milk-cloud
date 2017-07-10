@@ -1,7 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const path = require('path');
 const fs = require('fs');
+const path = require('path');
+const mime = require('mime');
+const moment = require('moment');
 
 const config = require('../config/config');
 const fileSizeCalc = require('../functions/fileSizeCalc');
@@ -57,7 +59,8 @@ router.get('/*', (req, res, next) => {
       files: fileList
     });
   } else if (!isDirectory) {
-    res.send(path.join(config.service.root, req.params[0]));
+    let filePath = path.join(config.service.root, req.params[0]);
+    res.download(filePath);
   }
 });
 
