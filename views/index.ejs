@@ -2,12 +2,17 @@
 <html>
   <head>
     <meta charset="utf-8">
+    
     <title>Milk Cloud</title>
   </head>
+
   <body>
     <% for (let file of files) { %>
-    <a href="<%= current %><%= file.name %>" class="file_name"><%= file.name %></a>
-    <span><%= file.size %></span><br />
+    <a href="<%= current %><%= file.isFile || file.name == '..' ? file.name : file.name + '/' %>" class="file_name"><%= file.name %></a>
+    <% if (file.isFile) { %>
+    <span><%= file.size %></span>
+    <% } %>
+    <br />
     <% } %>
   </body>
 </html>
