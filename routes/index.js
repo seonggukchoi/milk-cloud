@@ -60,6 +60,12 @@ router.get('/*', (req, res, next) => {
     });
   } else if (!isDirectory) {
     let filePath = path.join(config.service.root, req.params[0]);
+    let logMessage = `[${moment().format('YYYY.MM.DD HH:mm:ss')}] ${req.ip} - ${filePath}`;
+    console.log(logMessage);
+    fs.appendFile('log.txt', logMessage + '\n', err => {
+      if (err)
+        console.log(err);
+    })
     res.download(filePath);
   }
 });
