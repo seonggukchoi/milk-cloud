@@ -13,6 +13,7 @@ router.get('/', (req, res, next) => {
 
   let fileNames = fs.readdirSync(dirPath);
   let fileList = new Array();
+
   for (let file of fileNames) {
     let fileStat = fs.statSync(path.join(dirPath, file));
     let fileSize = fileSizeCalc(fileStat.size);
@@ -23,6 +24,18 @@ router.get('/', (req, res, next) => {
       size: fileSize
     });
   }
+
+  fileList.sort((a, b) => {
+    if (a.name.toLowerCase() < b.name.toLowerCase())
+      return -1;
+    else if (a.name.toLowerCase() > b.name.toLowerCase())
+      return 1;
+    return 0;
+  });
+
+  fileList.sort((a, b) => {
+    return a.isFile - b.isFile;
+  });
 
   res.render('index', {
     current: null,
@@ -38,12 +51,6 @@ router.get('/*', (req, res, next) => {
     let fileNames = fs.readdirSync(dirPath);
     let fileList = new Array();
 
-    fileList.push({
-      name: '..',
-      size: null,
-      isFile: false
-    });
-
     for (let file of fileNames) {
       let fileStat = fs.statSync(path.join(dirPath, file));
       let fileSize = fileSizeCalc(fileStat.size);
@@ -53,6 +60,24 @@ router.get('/*', (req, res, next) => {
         size: fileSize
       });
     }
+
+    fileList.sort((a, b) => {
+      if (a.name.toLowerCase() < b.name.toLowerCase())
+        return -1;
+      else if (a.name.toLowerCase() > b.name.toLowerCase())
+        return 1;
+      return 0;
+    });
+
+    fileList.sort((a, b) => {
+      return a.isFile - b.isFile;
+    });
+
+    fileList.unshift({
+      name: '..',
+      size: null,
+      isFile: false
+    });
 
     res.render('index', {
       current: '/' + req.params[0],

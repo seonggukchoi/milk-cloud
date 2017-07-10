@@ -2,17 +2,38 @@
 <html>
   <head>
     <meta charset="utf-8">
-    
+    <meta name="viewport" content="width=device-width, user-scalable=0, initial-scale=1">
+
     <title>Milk Cloud</title>
+
+    <link rel="stylesheet" href="/css/noto.css">
+    <link rel="stylesheet" href="/css/style.css">
   </head>
 
   <body>
-    <% for (let file of files) { %>
-    <a href="<%= current %><%= file.isFile || file.name == '..' ? file.name : file.name + '/' %>" class="file_name"><%= file.name %></a>
-    <% if (file.isFile) { %>
-    <span><%= file.size %></span>
-    <% } %>
-    <br />
-    <% } %>
+    <div id="headerWrapper">
+      <header>
+        <a id="titleLink" href="/"><img id="titleLogo" src="/img/cloud.png" alt="Cloud">MilkCloud</a>
+      </header>
+    </div>
+
+    <div id="filesContainerWrapper">
+      <div id="filesContainer">
+        <% for (let file of files) { %>
+        <a class="file_line" href="<%= current %><%= file.isFile || file.name == '..' ? file.name : file.name + '/' %>" title="<%= file.name %>">
+        <img class="file_type_image" src="/img/<%= file.isFile ? 'file' : 'directory' %>.png" alt="<%= file.isFile ? 'File' : 'Directory' %>">
+        <div class="file_name"><span><%= file.name %></span></div>
+        <% if (file.isFile) { %>
+        <div class="file_size"><%= file.size %></div>
+        <% } %>
+        <br />
+        </a>
+        <% } %>
+      </div>
+    </div>
+
+    <footer>
+      Copyright 2017. Milkgun all rights reserved.
+    </footer>
   </body>
 </html>
