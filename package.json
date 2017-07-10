@@ -1,13 +1,33 @@
 {
-  "name": "Milk Cloud",
+  "name": "milk_cloud",
   "version": "1.0.0",
+  "description": "파일을 업로드하고 공유할 목적으로 만드는 파일 클라우드입니다.",
+  "main": "app.js",
   "dependencies": {
     "ejs": "^2.5.6",
     "express": "^4.15.3",
-    "favicon": "0.0.2",
+    "favicon": "^0.0.2",
     "moment": "^2.18.1",
-    "node-ls": "0.0.4",
-    "path": "^0.12.7",
-    "serve-favicon": "^2.4.3"
-  }
+    "node-ls": "^0.0.4",
+    "serve-favicon": "^2.4.3",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Milkgun/Milk-Cloud.git"
+  },
+  "keywords": [
+    "node.js",
+    "cloud"
+  ],
+  "author": "Milkgun",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Milkgun/Milk-Cloud/issues"
+  },
+  "homepage": "https://github.com/Milkgun/Milk-Cloud#readme"
 }
