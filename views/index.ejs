@@ -19,6 +19,7 @@
 
     <div id="filesContainerWrapper">
       <div id="filesContainer">
+        <% if (files.length != 0) { %>
         <% for (let file of files) { %>
         <a class="file_line" href="<%= current %><%= file.isFile || file.name == '..' ? file.name : file.name + '/' %>" title="<%= file.name %>">
         <img class="file_type_image" src="/img/<%= file.isFile ? 'file' : 'directory' %>.png" alt="<%= file.isFile ? 'File' : 'Directory' %>">
@@ -28,6 +29,9 @@
         <% } %>
         <br />
         </a>
+        <% } %>
+        <% } else { %>
+        <div id="errorMessage">There is no file.</div>
         <% } %>
       </div>
     </div>
