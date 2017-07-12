@@ -1,7 +1,7 @@
 const config = {
   server: {
     host: 'localhost',
-    port: 8000
+    port: 3000
   },
   service: {
     name: 'Milk Cloud',
