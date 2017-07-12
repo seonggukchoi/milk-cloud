@@ -4,15 +4,42 @@ html {
   padding: 0;
 }
 
-html{
+html {
   height: 100%;
 }
 
 body {
   position: relative;
   min-height: 100%;
+  @media (min-width: 760px) {
+    font-size: 1rem;
+  }
+  @media (max-width: 759px) {
+    font-size: 0.9rem;
+  }
   font-weight: 300;
   letter-spacing: 1px;
+}
+
+* {
+  transition-property: width;
+  transition-duration: 0.1s;
+}
+
+.width_media_query {
+  @media (min-width: 1000px) {
+    width: 1000px;
+  }
+  @media (min-width: 760px) and (max-width: 999px) {
+    width: 760px;
+  }
+  @media (min-width: 480px) and (max-width: 759px) {
+    width: 480px;
+  }
+  @media (max-width: 360px) {
+    width: 100%;
+  }
+  padding: 0 16px;
 }
 
 #headerWrapper {
@@ -25,7 +52,8 @@ body {
 }
 
 header {
-  width: 1000px;
+  .width_media_query;
+  box-sizing: border-box;
   height: 100%;
   margin: 0 auto;
 
@@ -51,7 +79,7 @@ header {
   #titleLogo {
     width: auto;
     height: 1.8em;
-    margin-top: -5px;
+    margin-top: -0.3em;
     margin-right: 4px;
     vertical-align: middle;
   }
@@ -66,22 +94,27 @@ footer {
   bottom: 0;
   width: 100%;
   height: 50px;
-  background-color: #efefef;
-  color: #888;
+  background-color: #f4f4f4;
+  color: #aaa;
   font-weight: 100;
   text-align: center;
   line-height: 50px;
 }
 
 #filesContainerWrapper {
+  .width_media_query;
   box-sizing: border-box;
   margin: 0 auto;
-  max-width: 1000px;
-  padding: 116px 0;
+  padding: 116px 16px;
 }
 
 #filesContainer {
   border: 1px solid #ddd;
+}
+
+#errorMessage {
+  padding: 16px;
+  text-align: center;
 }
 
 .file_line {
@@ -110,15 +143,15 @@ footer {
 
   .file_type_image {
     float: left;
-    width: 20px;
-    height: 20px;
-    margin-top: 2px;
-    margin-right: 10px;
+    width: 1.6em;
+    height: 1.6em;
+    margin-top: 0.05em;
+    margin-right: 0.8em;
   }
 
   .file_name {
     float: left;
-    width: 70%;
+    width: 60%;
     overflow: hidden;
     text-overflow: ellipsis;
     word-wrap: normal;
